@@ -1,6 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import projectRouter from "./routes/projectRoute";
+import userRouter from "./routes/userRoute";
+
 
 dotenv.config();
 
@@ -17,6 +20,13 @@ mongoose
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
   });
+
+app.use(express.json());
+
+app.use("/projects", projectRouter);
+app.use("/user",userRouter)
+
+
 
 
   app.listen(PORT, () => {
