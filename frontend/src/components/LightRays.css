@@ -1,0 +1,17 @@
+.light-rays-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none; /* let UI be clickable through it */
+  overflow: hidden;
+}
+
+/* Fullscreen background version (use this className) */
+.rays-fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh; /* better on mobile */
+  z-index: 0;     /* behind your content */
+  background: #0a0a0f; /* very dark blue base behind transparent canvas */
+}
