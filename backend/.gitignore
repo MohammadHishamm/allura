@@ -1,0 +1,76 @@
+# ---- Dependencies ----
+node_modules/
+**/node_modules/
+
+# ---- Builds / Artifacts ----
+dist/
+build/
+**/dist/
+**/build/
+out/
+**/out/
+
+# ---- TypeScript ----
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---- Runtime data ----
+pids/
+*.pid
+*.pid.lock
+*.seed
+
+# ---- Coverage / Testing ----
+coverage/
+**/coverage/
+.nyc_output/
+.cypress-cache/
+playwright-report/
+test-results/
+
+# ---- Caches ----
+.cache/
+**/.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.next/            # in case you experiment with Next.js on the client
+
+# ---- Environment files (keep only examples tracked) ----
+**/.env
+**/.env.*
+!**/.env.example
+.env
+.env.*
+!.env.example
+.envrc
+
+# ---- Local data (adjust if you store uploads locally) ----
+uploads/
+tmp/
+temp/
+
+# ---- OS cruft ----
+.DS_Store
+Thumbs.db
+
+# ---- Editors / IDEs ----
+.vscode/*
+!.vscode/extensions.json   # keep recommended extensions if you want
+!.vscode/settings.json     # optional: keep shared settings
+.idea/
+*.iml
+
+# ---- Misc ----
+*.swp
+*.swo
+*.orig
