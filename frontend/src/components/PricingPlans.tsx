@@ -55,7 +55,7 @@ const plans: Plan[] = [
 
 const PricingPlans: React.FC = () => {
   return (
-    <section className="py-20 relative z-50 bg-white">
+    <section className="p-20 relative z-50 bg-white">
       <div className="container mx-auto">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">

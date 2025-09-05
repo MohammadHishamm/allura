@@ -74,7 +74,7 @@ const App = () => {
       {/* Content */}
       <main className="relative z-20">
         {/* Hero Section */}
-        <section className="section min-h-screen flex flex-col justify-center items-center text-center text-white">
+        <section className=" min-h-screen flex flex-col justify-center items-center text-center text-white">
           <div className="max-w-lg space-y-6">
             <h1 className="text-6xl font-bold leading-tight">Welcome to MySite</h1>
             <p className="text-xl text-gray-300">
