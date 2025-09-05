@@ -66,7 +66,7 @@ const App = () => {
               {/* Second Profile Card positioned beside the first */}
               <div style={{ position: 'absolute', left: '35%', top: '50%', transform: 'translateY(-50%)', zIndex: 20 }}>
                 <ProfileCard
-                  avatarUrl="/zeyad.jpeg"
+                  avatarUrl="/zeyad.jpg"
                   name="Zeyad Zayaty"
                   title="Founder & CEO"
                   handle="zeyadzayaty"
