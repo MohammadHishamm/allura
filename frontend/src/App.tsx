@@ -58,7 +58,7 @@ const App = () => {
         lightSpread={0.5}
         rayLength={1.5}
         followMouse={true}
-        mouseInfluence={0.1}
+        mouseInfluence={0.6}
         noiseAmount={0}
         distortion={0}
         className="rays-fullscreen"
