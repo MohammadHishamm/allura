@@ -171,8 +171,15 @@ const SignupForm: React.FC = () => {
           type: 'error',
           isVisible: true
         });
+        
+        // Redirect to home page after showing error
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
       }
-    } catch {
+    } catch (error) {
+      console.error('Registration error:', error);
+      
       // Clear form and show error
       setSignupData({
         username: '',
@@ -189,6 +196,11 @@ const SignupForm: React.FC = () => {
         type: 'error',
         isVisible: true
       });
+      
+      // Redirect to home page after showing error
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     } finally {
       setIsLoading(false);
     }

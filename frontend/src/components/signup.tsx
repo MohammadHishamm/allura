@@ -79,6 +79,20 @@ export default function Stepper({
     }
   };
 
+  const handleStepClick = (clickedStep: number) => {
+    // Only allow clicking on completed steps or the current step
+    // Prevent skipping ahead to unvalidated steps
+    if (clickedStep > currentStep) {
+      return; // Don't allow skipping ahead
+    }
+    
+    // Allow going back to previous steps
+    if (clickedStep < currentStep) {
+      setDirection(-1);
+      updateStep(clickedStep);
+    }
+  };
+
   const handleComplete = () => {
     setDirection(1);
     updateStep(totalSteps + 1);
@@ -97,20 +111,14 @@ export default function Stepper({
                   renderStepIndicator({
                     step: stepNumber,
                     currentStep,
-                    onStepClick: clicked => {
-                      setDirection(clicked > currentStep ? 1 : -1);
-                      updateStep(clicked);
-                    }
+                    onStepClick: handleStepClick
                   })
                 ) : (
                   <StepIndicator
                     step={stepNumber}
                     disableStepIndicators={disableStepIndicators}
                     currentStep={currentStep}
-                    onClickStep={clicked => {
-                      setDirection(clicked > currentStep ? 1 : -1);
-                      updateStep(clicked);
-                    }}
+                    onClickStep={handleStepClick}
                   />
                 )}
                 {isNotLastStep && <StepConnector isComplete={currentStep > stepNumber} />}
@@ -247,18 +255,28 @@ interface StepIndicatorProps {
 
 function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }: StepIndicatorProps) {
   const status = currentStep === step ? 'active' : currentStep < step ? 'inactive' : 'complete';
+  const isClickable = step <= currentStep && !disableStepIndicators;
 
   const handleClick = () => {
-    if (step !== currentStep && !disableStepIndicators) {
+    if (isClickable) {
       onClickStep(step);
     }
   };
 
   return (
-    <motion.div onClick={handleClick} className="step-indicator" animate={status} initial={false}>
+    <motion.div 
+      onClick={handleClick} 
+      className={`step-indicator ${!isClickable ? 'step-indicator-disabled' : ''}`} 
+      animate={status} 
+      initial={false}
+    >
       <motion.div
         variants={{
-          inactive: { scale: 1, backgroundColor: '#222', color: '#a3a3a3' },
+          inactive: { 
+            scale: 1, 
+            backgroundColor: isClickable ? '#222' : '#1a1a1a', 
+            color: isClickable ? '#a3a3a3' : '#666666' 
+          },
           active: { scale: 1, backgroundColor: '#5227FF', color: '#5227FF' },
           complete: { scale: 1, backgroundColor: '#5227FF', color: '#3b82f6' }
         }}
