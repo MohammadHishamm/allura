@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+:root {
+  --btn-bg: #ffffff;
+  --btn-hover: #1a001f;
+  --btn-text: #000000;
+  --btn-text-hover:var(--btn-bg);
+  --primary-font: 'Inter', sans-serif; /* optional for typography */
+}
+
+.btn-theme {
+  @apply px-6 py-3 rounded-lg transition;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.btn-theme:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-text-hove);
+}

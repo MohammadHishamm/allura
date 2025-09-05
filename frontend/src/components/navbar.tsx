@@ -1,61 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import './navbar.css';
-import ShinyText from './ShinyText';
+import { useState } from "react"
 
-interface NavbarProps {
-  className?: string;
+type NavLink = {
+  label: string
+  href: string
 }
 
-const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+type NavbarProps = {
+  brand: string
+  links: NavLink[]
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+const Navbar: React.FC<NavbarProps> = ({ brand, links }) => {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${className}`.trim()}>
-      <div className="navbar-container">
-        <div className="navbar-brand">
-           <ShinyText
-                  text="MZ Codes"
-                  disabled={false}
-                  speed={3}
-                  className="custom-class"
-                />
-        </div>
-        
-        <div className="navbar-menu">
-          <ul className="navbar-links">
-            <li className="navbar-item">
-              <a href="#home" className="navbar-link">Home</a>
-            </li>
-            <li className="navbar-item">
-              <a href="#about" className="navbar-link">About</a>
-            </li>
-            <li className="navbar-item">
-              <a href="#projects" className="navbar-link">Projects</a>
-            </li>
-            <li className="navbar-item">
-              <a href="#contact" className="navbar-link">Contact</a>
-            </li>
-          </ul>
-        </div>
-        
-        <div className="navbar-actions">
-          <button className="navbar-button primary">
-            Get Started
-          </button>
+    <nav className="bg-blue-600 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Brand */}
+          <div className="text-2xl font-bold">{brand}</div>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex space-x-6">
+            {links.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                className="hover:text-gray-200 transition"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="focus:outline-none"
+            >
+              {isOpen ? (
+                <span className="text-2xl">✖</span>
+              ) : (
+                <span className="text-2xl">☰</span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
-    </nav>
-  );
-};
 
-export default Navbar;
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-blue-500 px-2 pt-2 pb-3 space-y-1">
+          {links.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.href}
+              className="block px-3 py-2 rounded hover:bg-blue-400 transition"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
+  )
+}
+
+export default Navbar

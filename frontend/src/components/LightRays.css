@@ -13,5 +13,5 @@
   width: 100vw;
   height: 100dvh; /* better on mobile */
   z-index: 0;     /* behind your content */
-  background: #0a0a0f; /* very dark blue base behind transparent canvas */
+  background: #060010;  
 }
