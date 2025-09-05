@@ -65,4 +65,5 @@ body, html {
   overflow-x: hidden; /* disable horizontal scroll */
   overflow-y: auto;   /* enable vertical scroll */
   scroll-behavior: smooth; /* optional: smooth scroll */
+  scroll-padding-top: 100px; /* offset for fixed navbar */
 }

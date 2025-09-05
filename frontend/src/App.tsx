@@ -7,11 +7,12 @@ import { items } from "./components/CardNav";
 import CardSwap, { Card } from './components/aboutUs'
 import ProfileCard from './components/profileCard'
 import Footer from './components/Footer'
+import Admin from './components/admin'
 
 const App = () => {
   const logo = "/path-to-logo.png";
   return (
-    <div className="w-screen cursor-none relative overflow-x-hidden">
+    <div className="w-screen relative overflow-x-hidden">
       {/* Background */}
       <LightRays
         raysOrigin="top-center"
@@ -123,6 +124,7 @@ const App = () => {
               </section>
             </main>
           } />
+          <Route path="/admin297_2" element={<Admin />} />
         </Routes>
       </BrowserRouter>
       

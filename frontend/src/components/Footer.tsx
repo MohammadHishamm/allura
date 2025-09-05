@@ -3,7 +3,7 @@ import './Footer.css';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer">
+    <footer id="footer" className="footer">
       <div className="footer-content">
         {/* Company Description */}
         <div className="footer-section">

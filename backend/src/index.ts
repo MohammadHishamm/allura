@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import projectRouter from "./routes/projectRoute";
 import userRouter from "./routes/userRoute";
-
+import cors from "cors";
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ mongoose
   });
 
 app.use(express.json());
-
+app.use(cors());
 app.use("/projects", projectRouter);
 app.use("/user",userRouter)
 

@@ -33,9 +33,9 @@ export const items = [
       bgColor: "#271E37",
       textColor: "#fff",
       links: [
-        { label: "Email", ariaLabel: "Email us", href: "mailto:example@example.com" },
-        { label: "Twitter", ariaLabel: "Twitter", href: "https://twitter.com/example" },
-        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://linkedin.com/in/example" },
+        { label: "Email", ariaLabel: "Email us", href: "#footer" },
+        { label: "Twitter", ariaLabel: "Twitter", href: "#footer" },
+        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "#footer" },
       ],
     },
   ];
