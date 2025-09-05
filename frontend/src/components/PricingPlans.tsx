@@ -55,7 +55,7 @@ const plans: Plan[] = [
 
 const PricingPlans: React.FC = () => {
   return (
-    <section className="p-20 relative z-50 bg-white m-10 rounded-4xl">
+    <section className="p-20 relative z-50 bg-white m-10 rounded-4xl ">
       <div className="container mx-auto">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
@@ -99,7 +99,7 @@ const PricingPlans: React.FC = () => {
               <div className="p-10">
                 <ul className="mb-10 text-center space-y-4">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="font-medium dark:text-gray-300">
+                    <li key={i} className="font-medium dark:text-gray-300 ">
                       {feature}
                     </li>
                   ))}
