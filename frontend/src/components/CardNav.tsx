@@ -57,6 +57,7 @@ export interface CardNavProps {
     menuColor?: string;
     buttonBgColor?: string;
     buttonTextColor?: string;
+    customButton?: React.ReactNode;
 }
 
 const CardNav: React.FC<CardNavProps> = ({
@@ -68,7 +69,8 @@ const CardNav: React.FC<CardNavProps> = ({
     baseColor = '#fff',
     menuColor,
     buttonBgColor,
-    buttonTextColor
+    buttonTextColor,
+    customButton
 }) => {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -218,13 +220,16 @@ const CardNav: React.FC<CardNavProps> = ({
                         <img src={logo} alt={logoAlt} className="logo h-[28px]" />
                     </div>
 
-                    <button
-                        type="button"
-                        className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-target transition-colors duration-300 justify-center items-center text-center"
-                        style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-                    >
-                        Get Started
-                    </button>
+                    {customButton || (
+                        <button
+                            type="button"
+                            className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-target transition-colors duration-300 justify-center items-center text-center"
+                            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+                            onClick={() => window.location.href = '/signup'}
+                        >
+                            Get Started
+                        </button>
+                    )}
 
                 </div>
 

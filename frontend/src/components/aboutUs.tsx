@@ -11,7 +11,7 @@ import React, {
   useRef
 } from 'react';
 import gsap from 'gsap';
-import './aboutUs.css';
+import '../styles/aboutUs.css';
 
 export interface CardSwapProps {
   width?: number | string;

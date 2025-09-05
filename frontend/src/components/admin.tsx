@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './admin.css';
+import '../styles/admin.css';
+import Notification from './Notification';
+import LightRays from './background';
 
 interface LoginFormData {
   email: string;
@@ -18,6 +20,15 @@ const Admin: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: 'success' | 'error' | 'info';
+    isVisible: boolean;
+  }>({
+    message: '',
+    type: 'success',
+    isVisible: false
+  });
   const [loginData, setLoginData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -88,7 +99,11 @@ const Admin: React.FC = () => {
           githubLink: ''
         });
         setError('');
-        alert('Project added successfully!');
+        setNotification({
+          message: 'Project added successfully!',
+          type: 'success',
+          isVisible: true
+        });
       } else {
         const result = await response.json();
         setError(result.message || 'Failed to add project');
@@ -107,9 +122,25 @@ const Admin: React.FC = () => {
     setLoginData({ email: '', password: '' });
   };
 
+  const closeNotification = () => {
+    setNotification(prev => ({ ...prev, isVisible: false }));
+  };
+
   if (!isLoggedIn) {
     return (
       <div className="admin-container">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ffffffff"
+          raysSpeed={0.5}
+          lightSpread={0.5}
+          rayLength={1.5}
+          followMouse={true}
+          mouseInfluence={0.6}
+          noiseAmount={0}
+          distortion={0}
+          className="rays-fullscreen"
+        />
         <div className="admin-card">
           <h2 className="admin-title">Admin Login</h2>
           <form onSubmit={handleLogin} className="admin-form">
@@ -150,12 +181,30 @@ const Admin: React.FC = () => {
             </button>
           </form>
         </div>
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          isVisible={notification.isVisible}
+          onClose={closeNotification}
+        />
       </div>
     );
   }
 
   return (
     <div className="admin-container">
+      <LightRays
+        raysOrigin="top-center"
+        raysColor="#ffffffff"
+        raysSpeed={0.5}
+        lightSpread={0.5}
+        rayLength={1.5}
+        followMouse={true}
+        mouseInfluence={0.6}
+        noiseAmount={0}
+        distortion={0}
+        className="rays-fullscreen"
+      />
       <div className="admin-header">
         <h2 className="admin-title">Admin Panel</h2>
         <button onClick={handleLogout} className="logout-btn">
@@ -240,6 +289,12 @@ const Admin: React.FC = () => {
           </button>
         </form>
       </div>
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        isVisible={notification.isVisible}
+        onClose={closeNotification}
+      />
     </div>
   );
 };
