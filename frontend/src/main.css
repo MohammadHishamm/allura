@@ -11,6 +11,17 @@
   --primary-font: 'Inter', sans-serif;
 }
 
+@keyframes scroll {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: 0.5; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-scroll {
+  animation: scroll 3s infinite;
+}
+
+
 /* ==========================
    Button theme
 ========================== */

@@ -51,7 +51,7 @@ const App = () => {
               {/* First Profile Card positioned on the left */}
               <div style={{ position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 20 }}>
                 <ProfileCard
-                 avatarUrl="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+                  avatarUrl="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
                   name="Mohammad"
                   title="CEO & Founder"
                   handle="Mohammad"
@@ -77,7 +77,7 @@ const App = () => {
                   onContactClick={() => window.open('https://www.linkedin.com/in/zeyad-z-225607276/', '_blank')}
                 />
               </div>
-              
+
               {/* CardSwap positioned on the bottom-right as before */}
               <CardSwap
                 width={600}
@@ -105,29 +105,36 @@ const App = () => {
           <Route path="/" element={
             <main className="relative z-20">
               {/* Hero Section */}
-              <section className=" min-h-screen flex flex-col justify-center items-center text-center text-white">
+              {/* Hero Section */}
+              <section className="relative min-h-screen flex flex-col justify-center items-center text-center text-white">
                 <div className="max-w-lg space-y-6">
-                  <h1 className="text-6xl font-bold leading-tight">
-                    Welcome to MySite
-                  </h1>
+                  <h1 className="text-6xl font-bold leading-tight">Welcome to MySite</h1>
                   <p className="text-xl text-gray-300">
-                    We create immersive experiences with cutting-edge design and
-                    visuals.
+                    We create immersive experiences with cutting-edge design and visuals.
                   </p>
                   <button className="btn-theme cursor-target">Get Started</button>
                 </div>
+
+                {/* Mouse Scroll Indicator */}
+                <div className="absolute bottom-10 flex justify-center w-full">
+                  <div className="w-[22px] h-[40px] border-2 border-white rounded-full flex justify-center items-start p-[4px]">
+                    <div className="w-2 h-2 bg-white rounded-full animate-scroll"></div>
+                  </div>
+                </div>
               </section>
 
+
               {/* Pricing Plans Section */}
-              <section className=" ">
+              <section>
                 <PricingPlans />
               </section>
             </main>
+
           } />
           <Route path="/admin297_2" element={<Admin />} />
         </Routes>
       </BrowserRouter>
-      
+
       {/* Footer */}
       <Footer />
     </div>
