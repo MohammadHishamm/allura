@@ -12,7 +12,7 @@ import Admin from './components/admin'
 const App = () => {
   const logo = "/path-to-logo.png";
   return (
-    <div className="w-screen relative overflow-x-hidden">
+    <div >
       {/* Background */}
       <LightRays
         raysOrigin="top-center"

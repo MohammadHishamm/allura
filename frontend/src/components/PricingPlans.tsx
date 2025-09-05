@@ -55,7 +55,7 @@ const plans: Plan[] = [
 
 const PricingPlans: React.FC = () => {
   return (
-    <section className="p-20 relative z-50 bg-white">
+    <section className="p-20 relative z-50 bg-white m-10 rounded-4xl">
       <div className="container mx-auto">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
@@ -119,7 +119,7 @@ const PricingPlans: React.FC = () => {
         {/* Custom Plan */}
         <h5 className="text-center font-medium mt-14">
           Interested in a custom plan?{" "}
-          <a href="#" className="text-purple-500">
+          <a href="#" className="text-purple-500 cursor-target">
             Get in touch
           </a>
         </h5>
