@@ -3,7 +3,7 @@ import { ProjectModel } from "../modules/projectsModel";
 export const addProject = async (projectData: {
   name: string;
   description: string;
-  video: string[];
+  video: string;
   tags: string[];
   githubLink?: string;
 }) => {
@@ -50,7 +50,7 @@ export const updateProject = async (
   updateData: {
     name?: string;
     description?: string;
-    video?: string[];
+    video?: string;
     tags?: string[];
     githubLink?: string;
   }

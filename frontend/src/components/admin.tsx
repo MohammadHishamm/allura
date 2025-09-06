@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/admin.css';
+import '../styles/signup.css';
 import Notification from './Notification';
 import LightRays from './background';
 
@@ -14,6 +15,15 @@ interface ProjectFormData {
   video: string;
   tags: string;
   githubLink: string;
+}
+
+interface VideoUploadResponse {
+  success: boolean;
+  videoUrl?: string;
+  publicId?: string;
+  duration?: number;
+  message?: string;
+  error?: string;
 }
 
 const Admin: React.FC = () => {
@@ -40,6 +50,8 @@ const Admin: React.FC = () => {
     tags: '',
     githubLink: ''
   });
+  const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,12 +83,54 @@ const Admin: React.FC = () => {
     }
   };
 
+  const handleVideoUpload = async (file: File): Promise<string | null> => {
+    try {
+      const formData = new FormData();
+      formData.append('video', file);
+
+      const token = localStorage.getItem('token');
+      
+      const response = await fetch('http://localhost:5000/upload/video', {
+        method: 'POST',
+        headers: {
+          ...(token && { 'Authorization': `Bearer ${token}` }),
+        },
+        body: formData,
+      });
+
+      const result: VideoUploadResponse = await response.json();
+
+      if (result.success && result.videoUrl) {
+        console.log('✅ Video uploaded successfully:', result.videoUrl);
+        return result.videoUrl;
+      } else {
+        throw new Error(result.error || 'Video upload failed');
+      }
+    } catch (error) {
+      console.error('❌ Video upload error:', error);
+      throw error;
+    }
+  };
+
   const handleAddProject = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
+      if (!selectedVideo) {
+        throw new Error('Please select a video file');
+      }
+
+      console.log('📤 Uploading video file...');
+      setUploadProgress(10);
+      const videoUrl = await handleVideoUpload(selectedVideo);
+      setUploadProgress(100);
+
+      if (!videoUrl) {
+        throw new Error('Failed to upload video');
+      }
+
       const tagsArray = projectData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
       
       // Get token from localStorage (AuthProvider stores it there)
@@ -90,9 +144,14 @@ const Admin: React.FC = () => {
         },
         body: JSON.stringify({
           ...projectData,
+          video: videoUrl,
           tags: tagsArray
         }),
       });
+
+      console.log('📝 Project creation response status:', response.status);
+      const responseData = await response.json();
+      console.log('📝 Project creation response data:', responseData);
 
       if (response.ok) {
         setProjectData({
@@ -102,6 +161,8 @@ const Admin: React.FC = () => {
           tags: '',
           githubLink: ''
         });
+        setSelectedVideo(null);
+        setUploadProgress(0);
         setError('');
         setNotification({
           message: 'Project added successfully!',
@@ -109,8 +170,7 @@ const Admin: React.FC = () => {
           isVisible: true
         });
       } else {
-        const result = await response.json();
-        setError(result.message || 'Failed to add project');
+        setError(responseData.message || 'Failed to add project');
       }
     } catch (error) {
       setError('Failed to add project. Please try again.');
@@ -145,45 +205,53 @@ const Admin: React.FC = () => {
           distortion={0}
           className="rays-fullscreen"
         />
-        <div className="admin-card">
-          <h2 className="admin-title">Admin Login</h2>
-          <form onSubmit={handleLogin} className="admin-form">
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={loginData.email}
-                onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                required
-                className="form-input"
-                placeholder="Enter your email"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={loginData.password}
-                onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                required
-                className="form-input"
-                placeholder="Enter your password"
-              />
-            </div>
+        <div className="signup-form-container">
+          <div className="signin-form-wrapper">
+            <div className="signup-step">
+              <h2 className="step-title">Admin Login</h2>
+              <p className="step-description">Sign in to access the admin panel</p>
+              
+              <form onSubmit={handleLogin} className="signin-form">
+                <div className="form-group">
+                  <label htmlFor="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={loginData.email}
+                    onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+                    required
+                    className="form-input"
+                    placeholder="Enter your email address"
+                    disabled={isLoading}
+                  />
+                </div>
 
-            {error && <div className="error-message">{error}</div>}
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={loginData.password}
+                    onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+                    required
+                    className="form-input"
+                    placeholder="Enter your password"
+                    disabled={isLoading}
+                  />
+                </div>
 
-            <button 
-              type="submit" 
-              className="submit-btn"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Logging in...' : 'Login'}
-            </button>
-          </form>
+                {error && <div className="error-message">{error}</div>}
+
+                <button 
+                  type="submit" 
+                  className="btn-theme"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
         <Notification
           message={notification.message}
@@ -208,15 +276,10 @@ const Admin: React.FC = () => {
         noiseAmount={0}
         distortion={0}
         className="rays-fullscreen"
+        style={{ zIndex: 0 }}
       />
-      <div className="admin-header">
-        <h2 className="admin-title">Admin Panel</h2>
-        <button onClick={handleLogout} className="logout-btn">
-          Logout
-        </button>
-      </div>
-
-      <div className="admin-card">
+      
+      <div className="glass-admin-card" style={{ position: 'relative', zIndex: 10 }}>
         <h3 className="form-title">Add New Project</h3>
         <form onSubmit={handleAddProject} className="admin-form">
           <div className="form-group">
@@ -246,16 +309,46 @@ const Admin: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="video">Video URL</label>
+            <label htmlFor="video">Video Upload</label>
             <input
-              type="url"
+              type="file"
               id="video"
-              value={projectData.video}
-              onChange={(e) => setProjectData({ ...projectData, video: e.target.value })}
-              required
+              accept="video/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setSelectedVideo(file);
+                }
+              }}
               className="form-input"
-              placeholder="Enter video URL"
+              required
             />
+            {selectedVideo && (
+              <p style={{ marginTop: '8px', color: '#666', fontSize: '14px' }}>
+                Selected: {selectedVideo.name} ({(selectedVideo.size / (1024 * 1024)).toFixed(2)} MB)
+              </p>
+            )}
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <div style={{ marginTop: '8px' }}>
+                <div style={{ 
+                  width: '100%', 
+                  height: '4px', 
+                  backgroundColor: '#f0f0f0', 
+                  borderRadius: '2px',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{ 
+                    width: `${uploadProgress}%`, 
+                    height: '100%', 
+                    backgroundColor: '#007bff',
+                    transition: 'width 0.3s ease'
+                  }}></div>
+                </div>
+                <p style={{ marginTop: '4px', color: '#666', fontSize: '12px' }}>
+                  Uploading... {uploadProgress}%
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="form-group">
