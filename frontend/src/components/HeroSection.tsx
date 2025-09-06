@@ -23,7 +23,7 @@ const HeroSection = () => {
               Get Started
             </button>
             <button 
-              className="btn-theme-outline cursor-target"
+              className="btn-theme2 cursor-target"
               onClick={() => window.location.href = '/signin'}
             >
               Sign In

@@ -37,8 +37,8 @@ const UserNavbar: React.FC = () => {
         ) : (
           <button
             type="button"
-            className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-target transition-colors duration-300 justify-center items-center text-center"
-            style={{ backgroundColor: '#060010', color: '#fff' }}
+            className=" btn-theme2 card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-target transition-colors duration-300 justify-center items-center text-center"
+         
             onClick={() => window.location.href = '/signup'}
           >
             Get Started
