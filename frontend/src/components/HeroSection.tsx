@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex flex-col md:flex-row justify-center items-center text-white md:px-20 p-5">
       {/* Text Left */}
       <div className="md:w-1/2 flex flex-col justify-center items-start space-y-6 z-20 ms-4 ms-6">
-        <h1 className="text-6xl font-bold leading-tight">
+        <h1 className="text-6xl font-bold leading-tight title">
           Welcome to MySite
         </h1>
         <p className="text-xl text-gray-300">
@@ -23,7 +23,7 @@ const HeroSection = () => {
               Get Started
             </button>
             <button 
-              className="btn-theme-outline cursor-target"
+              className="btn-theme2 cursor-target"
               onClick={() => window.location.href = '/signin'}
             >
               Sign In

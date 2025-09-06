@@ -6,8 +6,14 @@
 :root {
   --btn-bg: #ffffff;
   --btn-hover: #1a001f;
-  --btn-text: #000000;
+  --btn-text: #1a001f;
   --btn-text-hover: var(--btn-bg);
+
+  --btn2-bg: #1a001f;
+  --btn2-hover: #ffffff;
+  --btn2-text: #ffffff;
+  --btn2-text-hover:var(--btn2-bg);
+
   --primary-font: 'Inter', sans-serif;
 }
 
@@ -31,19 +37,27 @@
 }
 
 /* ==========================
-   Button theme
+   Button 1 (light theme)
 ========================== */
 .btn-theme {
-  @apply px-6 py-3 rounded-lg transition relative z-20; /* z-20 to be above background */
+  @apply px-6 py-3 rounded-lg transition relative z-20;
   background-color: var(--btn-bg);
   color: var(--btn-text);
   cursor: pointer;
 }
 
-.btn-theme:hover {
-  background-color: var(--btn-hover);
-  color: var(--btn-text-hover);
+
+/* ==========================
+   Button 2 (dark theme)
+========================== */
+.btn-theme2 {
+  @apply px-6 py-3 rounded-lg transition relative z-20;
+  background-color: var(--btn2-bg);
+  color: var(--btn2-text);
+  cursor: pointer;
 }
+
+
 
 /* ==========================
    Light rays / background
@@ -56,6 +70,15 @@
   overflow: hidden;
 }
 
+.title
+{
+
+  background: linear-gradient(135deg, #fff, #a0a0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 .rays-fullscreen {
   position: fixed;
   inset: 0;

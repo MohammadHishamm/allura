@@ -221,7 +221,7 @@ const PricingPlans: React.FC<PricingPlansProps> = ({
                         {isSelected ? 'Selected' : `Select ${plan.name}`}
                       </button>
                     ) : (
-                      <button className="btn-theme cursor-target">
+                      <button className="btn-theme2 cursor-target">
                         Get {plan.name}
                       </button>
                     )}
@@ -235,7 +235,7 @@ const PricingPlans: React.FC<PricingPlansProps> = ({
         {/* Custom Plan */}
         <h5 className="text-center font-medium mt-14">
           Interested in a custom plan?{" "}
-          <a href="#" className="text-purple-500 cursor-target">
+          <a href="#" className="text-fuchsia-950 cursor-target">
             Get in touch
           </a>
         </h5>
