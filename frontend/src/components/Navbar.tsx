@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css"; // 👈 AOS styles
+import "aos/dist/aos.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +18,9 @@ export default function Navbar() {
   return (
     <div
       className="fixed top-7 left-0 w-full z-[100] pt-[15px] opacity-100 transform-none"
-      data-aos="zoom-in-up" // 👈 main navbar animation
+      data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500"
     >
       <div className="flex justify-center px-4 transition-all duration-300 py-3">
         <div
