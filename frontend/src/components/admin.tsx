@@ -180,11 +180,7 @@ const Admin: React.FC = () => {
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('adminToken');
-    setLoginData({ email: '', password: '' });
-  };
+  
 
   const closeNotification = () => {
     setNotification(prev => ({ ...prev, isVisible: false }));
@@ -276,7 +272,6 @@ const Admin: React.FC = () => {
         noiseAmount={0}
         distortion={0}
         className="rays-fullscreen"
-        style={{ zIndex: 0 }}
       />
       
       <div className="glass-admin-card" style={{ position: 'relative', zIndex: 10 }}>
