@@ -12,7 +12,7 @@ interface SignupData {
   password: string;
   confirmPassword: string;
   acceptedTerms: boolean;
-  selectedPlan: string | null;
+  selectedPlan: string;
 }
 
 interface SignupErrors {
@@ -34,7 +34,7 @@ const SignupForm: React.FC = () => {
     password: '',
     confirmPassword: '',
     acceptedTerms: false,
-    selectedPlan: null
+    selectedPlan: 'free' // Default to free plan
   });
 
   const [errors, setErrors] = useState<SignupErrors>({});
@@ -98,7 +98,17 @@ const SignupForm: React.FC = () => {
   };
 
   const handlePlanSelect = (planName: string) => {
-    setSignupData(prev => ({ ...prev, selectedPlan: planName }));
+    // Map plan names to proper values for backend
+    const planMapping: { [key: string]: string } = {
+      'Basic': 'basic',
+      'Professional': 'pro', 
+      'Ultimate': 'ultimate',
+      '': 'free' // for skip option
+    };
+    
+    const mappedPlan = planMapping[planName] || 'free';
+    console.log('🎯 Plan selected:', { original: planName, mapped: mappedPlan });
+    setSignupData(prev => ({ ...prev, selectedPlan: mappedPlan }));
   };
 
   const canProceedToNextStep = useCallback((currentStep: number): boolean => {
@@ -122,17 +132,21 @@ const SignupForm: React.FC = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
+      const requestData = {
+        username: signupData.username,
+        email: signupData.email,
+        password: signupData.password,
+        plan: signupData.selectedPlan
+      };
+      
+      console.log('📤 Sending registration data:', requestData);
+      
       const response = await fetch('http://localhost:5000/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username: signupData.username,
-          email: signupData.email,
-          password: signupData.password,
-          selectedPlan: signupData.selectedPlan
-        }),
+        body: JSON.stringify(requestData),
       });
 
       if (response.ok) {
@@ -162,7 +176,7 @@ const SignupForm: React.FC = () => {
           password: '',
           confirmPassword: '',
           acceptedTerms: false,
-          selectedPlan: null
+          selectedPlan: 'free'
         });
         setErrors({});
         
@@ -187,7 +201,7 @@ const SignupForm: React.FC = () => {
         password: '',
         confirmPassword: '',
         acceptedTerms: false,
-        selectedPlan: null
+        selectedPlan: 'free'
       });
       setErrors({});
       
@@ -208,6 +222,10 @@ const SignupForm: React.FC = () => {
 
   const closeNotification = () => {
     setNotification(prev => ({ ...prev, isVisible: false }));
+  };
+
+  const handleSigninClick = () => {
+    navigate('/signin');
   };
 
   return (
@@ -279,6 +297,20 @@ const SignupForm: React.FC = () => {
               />
               {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
             </div>
+
+            {/* Sign-in link in Step 1 */}
+            <div className="signup-footer">
+              <p className="signup-link-text">
+                Already have an account?{' '}
+                <button 
+                  type="button"
+                  onClick={handleSigninClick}
+                  className="signup-link-button"
+                >
+                  Sign in here
+                </button>
+              </p>
+            </div>
           </div>
         </Step>
 
@@ -348,7 +380,9 @@ const SignupForm: React.FC = () => {
             <div className="plan-selection">
               <PricingPlans 
                 onPlanSelect={handlePlanSelect} 
-                selectedPlan={signupData.selectedPlan}
+                selectedPlan={signupData.selectedPlan === 'basic' ? 'Basic' :
+                             signupData.selectedPlan === 'pro' ? 'Professional' :
+                             signupData.selectedPlan === 'ultimate' ? 'Ultimate' : null}
                 isSelectable={true}
               />
               
@@ -356,7 +390,7 @@ const SignupForm: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handlePlanSelect('')}
-                  className={`skip-button ${!signupData.selectedPlan ? 'selected' : ''}`}
+                  className={`skip-button ${signupData.selectedPlan === 'free' ? 'selected' : ''}`}
                 >
                   Skip for now - I'll choose later
                 </button>
@@ -389,7 +423,11 @@ const SignupForm: React.FC = () => {
                 <div className="summary-item">
                   <span className="label">Plan:</span>
                   <span className="value">
-                    {signupData.selectedPlan || 'No plan selected (can be added later)'}
+                    {signupData.selectedPlan === 'free' ? 'Free' : 
+                     signupData.selectedPlan === 'basic' ? 'Basic' :
+                     signupData.selectedPlan === 'pro' ? 'Professional' :
+                     signupData.selectedPlan === 'ultimate' ? 'Ultimate' :
+                     'No plan selected (can be added later)'}
                   </span>
                 </div>
               </div>
@@ -409,6 +447,20 @@ const SignupForm: React.FC = () => {
                 <span>Creating your account...</span>
               </div>
             )}
+
+            {/* Sign-in link inside the form */}
+            <div className="signup-footer">
+              <p className="signup-link-text">
+                Already have an account?{' '}
+                <button 
+                  type="button"
+                  onClick={handleSigninClick}
+                  className="signup-link-button"
+                >
+                  Sign in here
+                </button>
+              </p>
+            </div>
           </div>
         </Step>
       </Stepper>

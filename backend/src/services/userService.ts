@@ -8,6 +8,7 @@ interface RegisterParams {
     username: string;
     email: string;
     password: string;
+    plan: string;
     createdAt: Date;
     isAdmin: boolean;
 }

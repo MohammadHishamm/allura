@@ -902,4 +902,153 @@
     font-size: 0.75rem;
   }
 }
+
+/* Sign-in Form Styles */
+.signin-form-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.signin-form {
+  margin-bottom: 2rem;
+}
+
+.signin-button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.signin-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #5227ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.signin-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.signin-link-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.signin-link-button {
+  background: none;
+  border: none;
+  color: #5227ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.signin-link-button:hover {
+  color: #6b46c1;
+}
+
+.signin-link-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sign-up Footer Styles */
+.signup-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.signup-link-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.signup-link-button {
+  background: none;
+  border: none;
+  color: #5227ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.signup-link-button:hover {
+  color: #6b46c1;
+}
+
+/* Button Theme Outline */
+.btn-theme-outline {
+  background: transparent;
+  border: 2px solid #5227ff;
+  color: #5227ff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.btn-theme-outline:hover {
+  background: #5227ff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(82, 39, 255, 0.3);
+}
+
+.btn-theme-outline:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments for buttons */
+@media (max-width: 640px) {
+  .btn-theme-outline {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
   

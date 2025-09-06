@@ -7,6 +7,7 @@ import ProfileCard from './components/profileCard'
 import Footer from './components/Footer'
 import Admin from './components/admin'
 import SignupForm from "./components/SignupForm";
+import SigninForm from "./components/SigninForm";
 import UserNavbar from "./components/UserNavbar";
 import { UserProvider, useUser } from './contexts/UserContext';
 import ModelViewer from "./components/ModelViewer";
@@ -87,13 +88,36 @@ const AppContent = () => {
                 <p className="text-xl text-gray-300">
                   We create immersive experiences with cutting-edge design and visuals.
                 </p>
-                {!isLoggedIn && (
-                  <button 
-                    className="btn-theme cursor-target"
-                    onClick={() => window.location.href = '/signup'}
-                  >
-                    Get Started
-                  </button>
+                {!isLoggedIn ? (
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button 
+                      className="btn-theme cursor-target"
+                      onClick={() => window.location.href = '/signup'}
+                    >
+                      Get Started
+                    </button>
+                    <button 
+                      className="btn-theme-outline cursor-target"
+                      onClick={() => window.location.href = '/signin'}
+                    >
+                      Sign In
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button 
+                      className="btn-theme cursor-target"
+                      onClick={() => window.location.href = '/company'}
+                    >
+                      View Company
+                    </button>
+                    <button 
+                      className="btn-theme-outline cursor-target"
+                      onClick={() => window.location.href = '/admin297_2'}
+                    >
+                      Admin Panel
+                    </button>
+                  </div>
                 )}
               </div>
 
@@ -117,6 +141,7 @@ const AppContent = () => {
         } />
         <Route path="/admin297_2" element={<Admin />} />
         <Route path="/signup" element={<SignupForm />} />
+        <Route path="/signin" element={<SigninForm />} />
       </Routes>
       
       {/* Footer - only show on non-admin pages */}
