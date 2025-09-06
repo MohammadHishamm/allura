@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.post("/", validateJWT, async (req, res) => {
   const { name, description, video, tags, githubLink } = req.body;
+  console.log('📝 Creating project with data:', { name, description, video, tags, githubLink });
   const response = await addProject({ name, description, video, tags, githubLink });
+  console.log('📝 Project creation response:', response);
   res.status(response.statusCode).json(response);
 });
 
