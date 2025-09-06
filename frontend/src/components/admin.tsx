@@ -90,7 +90,7 @@ const Admin: React.FC = () => {
 
       const token = localStorage.getItem('token');
       
-      const response = await fetch('http://localhost:5000/upload/video', {
+      const response = await fetch('https://weather-app-5b0s.onrender.com/upload/video', {
         method: 'POST',
         headers: {
           ...(token && { 'Authorization': `Bearer ${token}` }),
