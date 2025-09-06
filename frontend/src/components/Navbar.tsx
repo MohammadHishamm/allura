@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useAuth } from "../auth/auth";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isAuth, username, isAdmin, logout } = useAuth();
 
   useEffect(() => {
     AOS.init({
@@ -161,14 +163,30 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Login Button */}
-          <div className="hidden md:block ml-4 m-5" data-aos="zoom-in">
-            <button
-              className="btn-theme cursor-target"
-              onClick={() => (window.location.href = "/signin")}
-            >
-              Sign In
-            </button>
+          {/* Authentication Buttons */}
+          <div className="hidden md:flex items-center gap-2 ml-4" data-aos="zoom-in">
+            {isAuth ? (
+              // User is logged in - show username and logout
+              <>
+                <div className="flex items-center gap-2 px-3 py-2 text-white">
+                  <span className="text-sm font-medium">Welcome, {username}</span>
+                </div>
+                <button
+                  className="btn-theme cursor-target"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              // User is not logged in - show sign in only
+              <button
+                className="btn-theme cursor-target"
+                onClick={() => (window.location.href = "/signin")}
+              >
+                Sign In
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -209,14 +227,33 @@ export default function Navbar() {
               </a>
             ))}
 
-            {/* Sign In for mobile */}
-            <button
-              className="mt-2 btn-theme cursor-target"
-              onClick={() => (window.location.href = "/signin")}
-              data-aos="zoom-in"
-            >
-              Sign In
-            </button>
+            {/* Authentication for mobile */}
+            <div className="mt-2 flex flex-col gap-2">
+              {isAuth ? (
+              // User is logged in - show username and logout
+              <>
+                <div className="px-3 py-2 text-white text-center">
+                  <span className="text-sm font-medium">Welcome, {username}</span>
+                </div>
+                <button
+                  className="btn-theme cursor-target"
+                  onClick={logout}
+                  data-aos="zoom-in"
+                >
+                  Logout
+                </button>
+              </>
+              ) : (
+                // User is not logged in - show sign in only
+                <button
+                  className="btn-theme cursor-target"
+                  onClick={() => (window.location.href = "/signin")}
+                  data-aos="zoom-in"
+                >
+                  Sign In
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

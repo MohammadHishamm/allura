@@ -1045,6 +1045,33 @@
   transform: translateY(0);
 }
 
+/* Purple filled button - same color as btn-theme-outline but filled */
+.btn-purple-filled {
+  background: #5227ff;
+  border: 2px solid #5227ff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-purple-filled:hover {
+  background: #3d1bb8;
+  border-color: #3d1bb8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(82, 39, 255, 0.4);
+}
+
+.btn-purple-filled:active {
+  transform: translateY(0);
+}
+
 /* Responsive adjustments for buttons */
 @media (max-width: 640px) {
   .btn-theme-outline {

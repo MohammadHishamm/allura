@@ -17,16 +17,10 @@ const HeroSection = () => {
         {!isAuth ? (
           <div className="flex flex-col sm:flex-row gap-4">
             <button
-              className="btn-theme cursor-target"
+              className="btn-purple-filled cursor-target"
               onClick={() => window.location.href = '/signup'}
             >
               Get Started
-            </button>
-            <button
-              className="btn-theme2 cursor-target"
-              onClick={() => window.location.href = '/signin'}
-            >
-              Sign In
             </button>
           </div>
         ) : (
