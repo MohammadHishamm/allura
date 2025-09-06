@@ -128,8 +128,8 @@ const AppContent = () => {
 
               {/* Scroll Mouse Animation */}
               <div className="absolute bottom-20 justify-center w-full z-20 md:flex hidden">
-                <div className="w-[30px] h-[50px] border-2 border-white rounded-full flex justify-center items-start p-[4px]">
-                  <div className="w-2 h-2 bg-white rounded-full animate-scroll"></div>
+                <div className="w-[27px] h-[45px] border-2 border-white rounded-full flex justify-center items-start p-[4px]">
+                  <div className="w-1 h-3 bg-white rounded-full animate-scroll"></div>
                 </div>
               </div>
             </section>
