@@ -3,7 +3,8 @@ import { createContext, useContext } from "react";
 interface authContextType {
   username: string | null;
   token: string | null;
-  login: (username: string, token: string) => void;
+  isAdmin: boolean;
+  login: (username: string, token: string, isAdmin?: boolean) => void;
   isAuth: boolean;
   logout: () => void;
 }
@@ -11,6 +12,7 @@ interface authContextType {
 export const AuthContext = createContext<authContextType>({
   username: null,
   token: null,
+  isAdmin: false,
   login: () => {},
   isAuth: false,
   logout: () => {},

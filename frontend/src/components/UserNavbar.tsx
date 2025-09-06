@@ -1,10 +1,10 @@
 import React from 'react';
 import CardNav from './CardNav';
 import { items } from './CardNav';
-import { useUser } from '../contexts/UserContext';
+import { useAuth } from '../auth/auth';
 
 const UserNavbar: React.FC = () => {
-  const { user, logout, isLoggedIn } = useUser();
+  const { username, logout, isAuth } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -22,10 +22,10 @@ const UserNavbar: React.FC = () => {
       buttonTextColor="#fff"
       ease="power3.out"
       customButton={
-        isLoggedIn ? (
+        isAuth ? (
           <div className="flex items-center gap-3">
             <span className="text-black text-sm font-medium">
-              Welcome, {user?.username}
+              Welcome, {username}
             </span>
             <button
               onClick={handleLogout}

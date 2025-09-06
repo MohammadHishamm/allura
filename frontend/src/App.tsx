@@ -4,10 +4,11 @@ import Admin from './components/admin';
 import SignupForm from "./components/SignupForm";
 import SigninForm from "./components/SigninForm";
 import UserNavbar from "./components/UserNavbar";
-import { UserProvider } from './contexts/UserContext';
+import AuthProvider from './auth/authProvider';
 import HomePage from './components/HomePage';
 import CompanyPage from './components/CompanyPage';
 import BackgroundWrapper from './components/BackgroundWrapper';
+
 
 const AppContent = () => {
   const location = useLocation();
@@ -31,7 +32,7 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <UserProvider>
+    <AuthProvider>
       <BackgroundWrapper>
         {/* Navbar */}
         <UserNavbar />
@@ -40,7 +41,7 @@ const App = () => {
           <AppContent />
         </BrowserRouter>
       </BackgroundWrapper>
-    </UserProvider>
+    </AuthProvider>
   );
 };
 

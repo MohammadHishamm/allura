@@ -79,10 +79,14 @@ const Admin: React.FC = () => {
     try {
       const tagsArray = projectData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
       
+      // Get token from localStorage (AuthProvider stores it there)
+      const token = localStorage.getItem('token');
+      
       const response = await fetch('http://localhost:5000/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` }),
         },
         body: JSON.stringify({
           ...projectData,

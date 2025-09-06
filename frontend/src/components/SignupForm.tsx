@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Stepper, { Step } from './signup';
 import PricingPlans from './PricingPlans';
 import Notification from './Notification';
-import { useUser } from '../contexts/UserContext';
+import { useAuth } from '../auth/auth';
 import '../styles/signup.css';
 
 interface SignupData {
@@ -26,7 +26,7 @@ interface SignupErrors {
 
 const SignupForm: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useUser();
+  const { login } = useAuth();
   
   const [signupData, setSignupData] = useState<SignupData>({
     username: '',
@@ -150,11 +150,12 @@ const SignupForm: React.FC = () => {
       });
 
       if (response.ok) {
-        // Login the user
-        login({
-          username: signupData.username,
-          email: signupData.email
-        });
+        const result = await response.json();
+        console.log('✅ Registration successful:', result);
+        console.log('🔑 JWT Token:', result.token);
+        
+        // Login the user with JWT token
+        login(result.username, result.token, result.isAdmin);
         
         setNotification({
           message: 'Account created successfully! Redirecting to home...',
@@ -168,6 +169,7 @@ const SignupForm: React.FC = () => {
         }, 2000);
       } else {
         const result = await response.json();
+        console.log('❌ Registration failed:', result, 'Status:', response.status);
         
         // Clear form and show error
         setSignupData({
@@ -192,7 +194,7 @@ const SignupForm: React.FC = () => {
         }, 3000);
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error('❌ Registration network error:', error);
       
       // Clear form and show error
       setSignupData({

@@ -30,9 +30,15 @@ export const register = async (registerData: RegisterParams) => {
   const newUser = new userModel(registerData);
   newUser.password = await bcrypt.hash(newUser.password, 10);
   await newUser.save();
-  return {data : generateJWT({username : newUser.username, email: newUser.email}), statusCode: 200};
+  console.log("✅ User saved to database:", newUser.username);
+  
+  const token = generateJWT({username : newUser.username, email: newUser.email, isAdmin: newUser.isAdmin});
+  console.log("✅ JWT token generated for:", newUser.username);
+  
+  return {data : {token, username: newUser.username, email: newUser.email, isAdmin: newUser.isAdmin}, statusCode: 200};
 
   }catch(err){
+    console.error("❌ Registration error:", err);
     return {data: "Internal Server Error", statusCode: 500};
   }
 };
@@ -51,7 +57,8 @@ export const login = async (loginData: LoginParams) => {
     throw {data: "Invalid credentials",statusCode: 401};
   }
 
-  return {data: generateJWT({email: findUser.email, username: findUser.username}), statusCode: 200};
+  const token = generateJWT({email: findUser.email, username: findUser.username, isAdmin: findUser.isAdmin});
+  return {data: {token, username: findUser.username, email: findUser.email, isAdmin: findUser.isAdmin}, statusCode: 200};
   }catch(err){
     return {data: "Internal Server Error", statusCode: 500};
   }

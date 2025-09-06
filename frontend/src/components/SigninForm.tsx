@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Notification from './Notification';
-import { useUser } from '../contexts/UserContext';
+import { useAuth } from '../auth/auth';
 import '../styles/signup.css';
 
 interface SigninData {
@@ -16,7 +16,7 @@ interface SigninErrors {
 
 const SigninForm: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useUser();
+  const { login } = useAuth();
   
   const [signinData, setSigninData] = useState<SigninData>({
     email: '',
@@ -82,12 +82,11 @@ const SigninForm: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json();
+        console.log('✅ Login successful:', result);
+        console.log('🔑 JWT Token:', result.token);
         
-        // Login the user
-        login({
-          username: result.username,
-          email: result.email
-        });
+        // Login the user with JWT token
+        login(result.username, result.token, result.isAdmin);
         
         setNotification({
           message: 'Welcome back! Redirecting to home...',

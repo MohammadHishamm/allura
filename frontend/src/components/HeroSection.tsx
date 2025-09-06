@@ -1,8 +1,8 @@
-import { useUser } from '../contexts/UserContext';
+import { useAuth } from '../auth/auth';
 import ModelViewer from './ModelViewer';
 
 const HeroSection = () => {
-  const { isLoggedIn } = useUser();
+  const { isAuth, isAdmin } = useAuth();
 
   return (
     <section className="relative min-h-screen flex flex-col md:flex-row justify-center items-center text-white md:px-20 p-5">
@@ -14,7 +14,7 @@ const HeroSection = () => {
         <p className="text-xl text-gray-300">
           We create immersive experiences with cutting-edge design and visuals.
         </p>
-        {!isLoggedIn ? (
+        {!isAuth ? (
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
               className="btn-theme cursor-target"
@@ -37,12 +37,14 @@ const HeroSection = () => {
             >
               View Company
             </button>
-            <button 
-              className="btn-theme-outline cursor-target"
-              onClick={() => window.location.href = '/admin297_2'}
-            >
-              Admin Panel
-            </button>
+            {isAdmin && (
+              <button 
+                className="btn-theme-outline cursor-target"
+                onClick={() => window.location.href = '/admin297_2'}
+              >
+                Admin Panel
+              </button>
+            )}
           </div>
         )}
       </div>
