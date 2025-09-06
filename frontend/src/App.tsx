@@ -21,7 +21,7 @@ const AppContent = () => {
     <>
       <Routes>
         <Route path="/company" element={
-          <div style={{ height: '100vh', position: 'relative', width: '100%', overflow: 'hidden' }}>
+          <div style={{ height: '100vh', position: 'relative', width: '100%', overflow: 'hidden' }} className="mt-30 mb-15">
             {/* First Profile Card positioned on the left */}
             <div style={{ position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 20 }}>
               <ProfileCard
@@ -134,7 +134,7 @@ const AppContent = () => {
               </div>
             </section>
             {/* Pricing Plans Section */}
-            <section className="py-20 bg-gray-900">
+            <section className="py-20">
               <PricingPlans />
             </section>
           </main>

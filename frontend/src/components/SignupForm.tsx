@@ -229,7 +229,7 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <div className="signup-form-container">
+    <div className="signup-form-container mt-43 mb-43">
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
