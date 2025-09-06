@@ -93,8 +93,7 @@
 ========================== */
 .section {
   position: relative;
-  z-index: 10; /* above background, below any modals */
-  padding: 6rem 1.5rem; /* top/bottom + sides */
+  z-index: 10; /* above background, below any modals *
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* each section fills viewport height */

@@ -3,7 +3,7 @@ import PricingPlans from './PricingPlans';
 
 const HomePage = () => {
   return (
-    <main className="relative z-20 md:mt-8">
+    <main className="relative z-20">
       {/* Hero Section */}
       <HeroSection />
       

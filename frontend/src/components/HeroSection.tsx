@@ -1,28 +1,28 @@
 import { useAuth } from '../auth/auth';
-import ModelViewer from './ModelViewer';
 
 const HeroSection = () => {
   const { isAuth, isAdmin } = useAuth();
 
   return (
-    <section className="relative min-h-screen flex flex-col md:flex-row justify-center items-center text-white md:px-20 p-5">
-      {/* Text Left */}
-      <div className="md:w-1/2 flex flex-col justify-center items-start space-y-6 z-20 ms-4 ms-6">
+    <section className="relative min-h-screen flex flex-col md:flex-row justify-center items-center text-white md:px-20 p-2">
+      {/* Text Center */}
+      <div className="md:w-1/2 flex flex-col justify-center items-center text-center space-y-6 z-20 px-4">
         <h1 className="text-6xl font-bold leading-tight title">
-          Welcome to MySite
+          Welcome to Allura
         </h1>
         <p className="text-xl text-gray-300">
-          We create immersive experiences with cutting-edge design and visuals.
+          An all-in-one scheduling platform for clinics, salons, tutors, and more.
+          Book online, get automated reminders, and never miss an appointment again.
         </p>
         {!isAuth ? (
           <div className="flex flex-col sm:flex-row gap-4">
-            <button 
+            <button
               className="btn-theme cursor-target"
               onClick={() => window.location.href = '/signup'}
             >
               Get Started
             </button>
-            <button 
+            <button
               className="btn-theme2 cursor-target"
               onClick={() => window.location.href = '/signin'}
             >
@@ -31,14 +31,14 @@ const HeroSection = () => {
           </div>
         ) : (
           <div className="flex flex-col sm:flex-row gap-4">
-            <button 
+            <button
               className="btn-theme cursor-target"
               onClick={() => window.location.href = '/company'}
             >
               View Company
             </button>
             {isAdmin && (
-              <button 
+              <button
                 className="btn-theme-outline cursor-target"
                 onClick={() => window.location.href = '/admin297_2'}
               >
@@ -47,11 +47,6 @@ const HeroSection = () => {
             )}
           </div>
         )}
-      </div>
-
-      {/* 3D Model Right */}
-      <div className="md:w-1/2 w-full md:mt-0 md:flex hidden">
-        <ModelViewer url="/models/gaming_desktop_pc_blend_file/scene.gltf" />
       </div>
 
       {/* Scroll Mouse Animation */}
