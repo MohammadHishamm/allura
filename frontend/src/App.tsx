@@ -3,7 +3,7 @@ import Footer from './components/Footer';
 import Admin from './components/admin';
 import SignupForm from "./components/SignupForm";
 import SigninForm from "./components/SigninForm";
-import UserNavbar from "./components/UserNavbar";
+import Navbar from "./components/Navbar";
 import AuthProvider from './auth/authProvider';
 import HomePage from './components/HomePage';
 import CompanyPage from './components/CompanyPage';
@@ -35,7 +35,7 @@ const App = () => {
     <AuthProvider>
       <BackgroundWrapper>
         {/* Navbar */}
-        <UserNavbar />
+        <Navbar />
 
         <BrowserRouter>
           <AppContent />
