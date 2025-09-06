@@ -26,6 +26,7 @@ interface LightRaysProps {
   noiseAmount?: number;
   distortion?: number;
   className?: string;
+  customRayDirection?: { x: number; y: number };
 }
 
 const DEFAULT_COLOR = '#e6f3ff';
@@ -74,7 +75,8 @@ const LightRays: React.FC<LightRaysProps> = ({
   mouseInfluence = 0.3,
   noiseAmount = 0.05,
   distortion = 0.02,
-  className = ''
+  className = '',
+  customRayDirection
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const uniformsRef = useRef<Record<string, { value: number | number[] | boolean }> | null>(null);
@@ -303,7 +305,13 @@ void main() {
 
         const { anchor, dir } = getAnchorAndDir(raysOrigin, w, h);
         uniforms.rayPos.value = anchor;
-        uniforms.rayDir.value = dir;
+        
+        // Use custom ray direction if provided (for mobile device orientation)
+        if (customRayDirection) {
+          uniforms.rayDir.value = [customRayDirection.x, customRayDirection.y];
+        } else {
+          uniforms.rayDir.value = dir;
+        }
       };
 
       const loop = (t: number) => {
@@ -312,6 +320,11 @@ void main() {
         }
 
         uniforms.iTime.value = t * 0.001;
+
+        // Update ray direction for mobile device orientation
+        if (customRayDirection) {
+          uniforms.rayDir.value = [customRayDirection.x, customRayDirection.y];
+        }
 
         if (followMouse && mouseInfluence > 0.0) {
           const smoothing = 0.92;
@@ -386,7 +399,8 @@ void main() {
     followMouse,
     mouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
+    customRayDirection
   ]);
 
   useEffect(() => {
