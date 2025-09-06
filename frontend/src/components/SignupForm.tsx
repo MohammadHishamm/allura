@@ -141,7 +141,7 @@ const SignupForm: React.FC = () => {
       
       console.log('📤 Sending registration data:', requestData);
       
-      const response = await fetch('http://localhost:5000/user/register', {
+      const response = await fetch('https://weather-app-5b0s.onrender.com/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

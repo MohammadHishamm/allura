@@ -59,7 +59,7 @@ const Admin: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/user/login', {
+      const response = await fetch('https://weather-app-5b0s.onrender.com/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ const Admin: React.FC = () => {
       // Get token from localStorage (AuthProvider stores it there)
       const token = localStorage.getItem('token');
       
-      const response = await fetch('http://localhost:5000/projects', {
+      const response = await fetch('https://weather-app-5b0s.onrender.com/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
