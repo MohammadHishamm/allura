@@ -26,6 +26,7 @@ const BackgroundWrapper = ({ children }: { children: React.ReactNode }) => {
 
     const handleOrientationChange = (event: DeviceOrientationEvent) => {
       if (event.alpha !== null && event.beta !== null && event.gamma !== null) {
+        console.log('Device Orientation:', { alpha: event.alpha, beta: event.beta, gamma: event.gamma });
         setDeviceOrientation({
           alpha: event.alpha,
           beta: event.beta,
@@ -38,6 +39,7 @@ const BackgroundWrapper = ({ children }: { children: React.ReactNode }) => {
       if (event.accelerationIncludingGravity) {
         const { x, y, z } = event.accelerationIncludingGravity;
         if (x !== null && y !== null && z !== null) {
+          console.log('Device Motion:', { x, y, z });
           setDeviceMotion({ x, y, z });
         }
       }
@@ -70,21 +72,34 @@ const BackgroundWrapper = ({ children }: { children: React.ReactNode }) => {
     if (!isMobile) return { x: 0, y: 1 };
 
     // Convert device orientation to ray direction
-   
+    const alpha = (deviceOrientation.alpha || 0) * Math.PI / 180;
     const beta = (deviceOrientation.beta || 0) * Math.PI / 180;
     const gamma = (deviceOrientation.gamma || 0) * Math.PI / 180;
 
-    // Calculate ray direction based on device tilt with reduced sensitivity
-    const tiltX = Math.sin(gamma) * 0.2; // Reduced from 0.5 to 0.2
-    const tiltY = Math.sin(beta) * 0.2;  // Reduced from 0.5 to 0.2
+    // Calculate ray direction based on device tilt
+    // Gamma controls left/right tilt (X direction)
+    // Beta controls forward/back tilt (Y direction)
+    const tiltX = Math.sin(gamma) * 0.3; // Left/right tilt
+    const tiltY = Math.sin(beta) * 0.3;  // Forward/back tilt
 
-    // Add motion influence with reduced sensitivity
-    const motionX = Math.max(-0.1, Math.min(0.1, deviceMotion.x * 0.005)); // Reduced sensitivity
-    const motionY = Math.max(-0.1, Math.min(0.1, deviceMotion.y * 0.005)); // Reduced sensitivity
+    // Add motion influence
+    const motionX = Math.max(-0.2, Math.min(0.2, (deviceMotion.x || 0) * 0.01));
+    const motionY = Math.max(-0.2, Math.min(0.2, (deviceMotion.y || 0) * 0.01));
+
+    // Combine tilt and motion
+    const finalX = tiltX + motionX;
+    const finalY = 1 + tiltY + motionY;
+
+    console.log('Ray Direction:', { 
+      tiltX, tiltY, motionX, motionY, 
+      finalX, finalY,
+      orientation: { alpha, beta, gamma },
+      motion: { x: deviceMotion.x, y: deviceMotion.y }
+    });
 
     return {
-      x: tiltX + motionX,
-      y: 1 + tiltY + motionY
+      x: finalX,
+      y: finalY
     };
   };
 
