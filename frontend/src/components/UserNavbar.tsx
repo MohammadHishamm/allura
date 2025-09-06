@@ -13,7 +13,7 @@ const UserNavbar: React.FC = () => {
 
   return (
     <CardNav
-      logo="/vite.svg"
+      logo="/Logo.png"
       logoAlt="Company Logo"
       items={items}
       baseColor="#fff"
