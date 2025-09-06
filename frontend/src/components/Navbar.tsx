@@ -7,7 +7,7 @@ import { useAuth } from "../auth/auth";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuth, username, isAdmin, logout } = useAuth();
+  const { isAuth, username, logout } = useAuth();
 
   useEffect(() => {
     AOS.init({
