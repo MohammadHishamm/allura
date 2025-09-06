@@ -153,7 +153,7 @@ const AppContent = () => {
 const App = () => {
   return (
     <UserProvider>
-      <div className="w-screen relative overflow-x-hidden">
+      <div className="w-screen relative overflow-x-hidden ">
         {/* Background */}
         <LightRays
           raysOrigin="top-center"
