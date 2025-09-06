@@ -46,13 +46,9 @@ test-results/
 .next/            # in case you experiment with Next.js on the client
 
 # ---- Environment files (keep only examples tracked) ----
-**/.env
-**/.env.*
-!**/.env.example
 .env
-.env.*
 !.env.example
-.envrc
+
 
 # ---- Local data (adjust if you store uploads locally) ----
 uploads/
