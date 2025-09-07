@@ -231,7 +231,7 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <div className="signup-form-container flex-grow pt-16 pb-20 ">
+    <div className="signup-form-container flex-grow pt-16 pb-20">
       <Stepper
         initialStep={1}
         onStepChange={(step) => {
