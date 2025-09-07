@@ -12,11 +12,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage, onPageChange })
     { id: 'projects', label: 'Projects', icon: '📁' }
   ] as const;
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    window.location.reload();
-  };
-
   return (
     <div className="admin-sidebar">
       <div className="sidebar-header">
@@ -39,12 +34,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage, onPageChange })
         ))}
       </nav>
       
-      <div className="sidebar-footer">
-        <button className="logout-btn" onClick={handleLogout}>
-          <span className="logout-icon">🚪</span>
-          <span>Logout</span>
-        </button>
-      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../auth/auth';
 import '../styles/admin.css';
 import '../styles/signup.css';
 import '../styles/admin-dashboard.css';
@@ -13,6 +14,7 @@ interface LoginFormData {
 
 
 const Admin: React.FC = () => {
+  const { isAuth, isAdmin, login } = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -29,6 +31,14 @@ const Admin: React.FC = () => {
     email: '',
     password: ''
   });
+
+  // Check if user is already logged in as admin
+  useEffect(() => {
+    const adminToken = localStorage.getItem('adminToken');
+    if (isAuth && isAdmin && adminToken) {
+      setIsLoggedIn(true);
+    }
+  }, [isAuth, isAdmin]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +59,8 @@ const Admin: React.FC = () => {
       if (response.ok && result.isAdmin) {
         setIsLoggedIn(true);
         localStorage.setItem('adminToken', result.token || 'admin-logged-in');
+        // Update auth context
+        login(result.username || 'Admin', result.token || 'admin-logged-in', true);
       } else {
         setError('Invalid credentials or insufficient permissions');
       }
