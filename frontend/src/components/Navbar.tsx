@@ -8,6 +8,13 @@ import { useAuth } from "../auth/auth";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuth, username, logout } = useAuth();
+const [activeLink, setActiveLink] = useState(window.location.pathname);
+
+useEffect(() => {
+  const handleLocationChange = () => setActiveLink(window.location.pathname);
+  window.addEventListener("popstate", handleLocationChange);
+  return () => window.removeEventListener("popstate", handleLocationChange);
+}, []);
 
   useEffect(() => {
     AOS.init({
@@ -21,8 +28,8 @@ export default function Navbar() {
     <div
       className="fixed top-7 left-0 w-full z-[100] pt-[15px] opacity-100 transform-none"
       data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="1500"
+      data-aos-easing="linear"
+      data-aos-duration="1500"
     >
       <div className="flex justify-center px-4 transition-all duration-300 py-3">
         <div
@@ -65,19 +72,16 @@ export default function Navbar() {
               <span className="sr-only">Toggle menu</span>
               <div className="relative w-6 h-5 flex flex-col justify-between transition-all duration-300">
                 <span
-                  className={`h-0.5 w-6 bg-white rounded-full origin-left transition-all duration-300 ${
-                    menuOpen ? "rotate-45 translate-y-2" : ""
-                  }`}
+                  className={`h-0.5 w-6 bg-white rounded-full origin-left transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""
+                    }`}
                 />
                 <span
-                  className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 ${
-                    menuOpen ? "opacity-0" : "opacity-100"
-                  }`}
+                  className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"
+                    }`}
                 />
                 <span
-                  className={`h-0.5 w-6 bg-white rounded-full origin-left transition-all duration-300 ${
-                    menuOpen ? "-rotate-45 -translate-y-2" : ""
-                  }`}
+                  className={`h-0.5 w-6 bg-white rounded-full origin-left transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""
+                    }`}
                 />
               </div>
             </button>
@@ -85,16 +89,15 @@ export default function Navbar() {
 
           {/* Desktop menu */}
           <div
-            className="hidden md:flex items-center mx-auto gap-2"
-            data-aos="fade-up"
-          >
+            className="hidden md:flex items-center mx-auto gap-2" data-aos="fade-up">
             {[
-              { href: "/", label: "Home", active: true },
-              { href: "/#benefits", label: "Benefits" },
-              { href: "/#plans", label: "Plans" },
-              { href: "/#contact", label: "Contact" },
-              { href: "/tutorial", label: "Tutorials" },
-              { href: "/blogs", label: "Blogs" },
+              { href: "/", label: "home"},
+              { href: "/#benefits", label: "benefits" },
+              { href: "/#plans", label: "plans" },
+              { href: "/#contact", label: "contact" },
+              { href: "/tutorial", label: "tutorials" },
+              { href: "/projects", label: "projects" },
+
             ].map((item, idx) => (
               <a
                 key={idx}
@@ -106,10 +109,8 @@ export default function Navbar() {
                   font-medium text-white rounded
                   whitespace-nowrap
                   cursor-pointer no-underline cursor-target
-                  ${item.active ? "bg-white/10" : "hover:bg-white/5"}
+                   ${activeLink === item.href ? "bg-white/10" : "hover:bg-white/5"}
                 `}
-                data-aos="zoom-in"
-                data-aos-delay={idx * 100} // 👈 staggered animation
               >
                 {item.label}
               </a>
@@ -121,28 +122,6 @@ export default function Navbar() {
             className="hidden md:flex items-center gap-2 mr-2"
             data-aos="fade-left"
           >
-            {/* Dark/Light mode toggle */}
-            <button
-              className="flex items-center justify-center w-10 h-10 hover:bg-white/10 text-white rounded-lg transition-all duration-200"
-              aria-label="Switch to light mode"
-              title="Switch to light mode"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="5"></circle>
-                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-              </svg>
-            </button>
-
             {/* Language toggle */}
             <div className="flex items-center">
               <button
@@ -204,12 +183,12 @@ export default function Navbar() {
             "
           >
             {[
-              { href: "/", label: "home", active: true },
+              { href: "/", label: "home"},
               { href: "/#benefits", label: "Benefits" },
               { href: "/#plans", label: "Plans" },
               { href: "/#contact", label: "Contact" },
               { href: "/tutorial", label: "Tutorials" },
-              { href: "/blogs", label: "Blogs" },
+              { href: "/projects", label: "projects" },
             ].map((item, idx) => (
               <a
                 key={idx}
@@ -218,7 +197,7 @@ export default function Navbar() {
                   px-3 py-2 text-[15px]
                   font-medium text-white rounded
                   transition-all duration-200 cursor-target
-                  ${item.active ? "bg-white/10" : "hover:bg-white/5"}
+                  ${activeLink === item.href ? "bg-white/10" : "hover:bg-white/5"}
                 `}
                 data-aos="fade-up"
                 data-aos-delay={idx * 100}
@@ -230,19 +209,19 @@ export default function Navbar() {
             {/* Authentication for mobile */}
             <div className="mt-2 flex flex-col gap-2">
               {isAuth ? (
-              // User is logged in - show username and logout
-              <>
-                <div className="px-3 py-2 text-white text-center">
-                  <span className="text-sm font-medium">Welcome, {username}</span>
-                </div>
-                <button
-                  className="btn-theme cursor-target"
-                  onClick={logout}
-                  data-aos="zoom-in"
-                >
-                  Logout
-                </button>
-              </>
+                // User is logged in - show username and logout
+                <>
+                  <div className="px-3 py-2 text-white text-center">
+                    <span className="text-sm font-medium">Welcome, {username}</span>
+                  </div>
+                  <button
+                    className="btn-theme cursor-target"
+                    onClick={logout}
+                    data-aos="zoom-in"
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
                 // User is not logged in - show sign in only
                 <button
