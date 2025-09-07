@@ -399,8 +399,8 @@ void main() {
     followMouse,
     mouseInfluence,
     noiseAmount,
-    distortion,
-    customRayDirection
+    distortion
+    // customRayDirection removed to prevent WebGL context recreation
   ]);
 
   useEffect(() => {
@@ -438,6 +438,14 @@ void main() {
     noiseAmount,
     distortion
   ]);
+
+  // Handle custom ray direction updates without recreating WebGL context
+  useEffect(() => {
+    if (!uniformsRef.current || !customRayDirection) return;
+    
+    const u = uniformsRef.current;
+    u.rayDir.value = [customRayDirection.x, customRayDirection.y];
+  }, [customRayDirection]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
