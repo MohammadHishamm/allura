@@ -4,14 +4,15 @@ import dotenv from "dotenv";
 import projectRouter from "./routes/projectRoute";
 import userRouter from "./routes/userRoute";
 import uploadRouter from "./routes/uploadRoute";
+import contactRouter from "./routes/contactRoute";
 import cors from "cors";
 
 dotenv.config();
 
 
 const app = express();
-const PORT = process.env.PORT;
-const MONGO_URI = process.env.MONGO_URI || "your_mongodb_connection_string_here";
+const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/allura-contacts";
 
 
 
@@ -38,6 +39,7 @@ app.use(cors());
 app.use("/projects", projectRouter);
 app.use("/user", userRouter);
 app.use("/upload", uploadRouter);
+app.use("/contact", contactRouter);
 
 
 

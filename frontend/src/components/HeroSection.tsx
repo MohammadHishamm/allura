@@ -11,8 +11,7 @@ const HeroSection = () => {
           Welcome to Allura
         </h1>
         <p className="text-xl text-gray-300">
-          An all-in-one scheduling platform for clinics, salons, tutors, and more.
-          Book online, get automated reminders, and never miss an appointment again.
+          A software house agency that provides software development services to businesses. We are a team of experienced developers who are dedicated to providing the best possible software development services to our clients.
         </p>
         {!isAuth ? (
           <div className="flex flex-col sm:flex-row gap-4">
