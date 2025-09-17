@@ -94,7 +94,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative">
+    <div className="min-h-screen flex items-center justify-center p-4 relative pt-32">
       <div className="w-full max-w-2xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
@@ -126,7 +126,7 @@ const ContactForm: React.FC = () => {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30 cursor-target"
                     placeholder="Enter your first name"
                   />
                 </div>
@@ -140,7 +140,7 @@ const ContactForm: React.FC = () => {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30 cursor-target"
                     placeholder="Enter your last name"
                   />
                 </div>
@@ -159,13 +159,13 @@ const ContactForm: React.FC = () => {
                         formData.projectTypes.includes(type)
                           ? 'bg-purple-500/30 border-purple-400 text-white'
                           : 'bg-white/10 border-white/20 text-purple-200 hover:bg-white/20'
-                      }`}
+                      } cursor-target`}
                     >
                       <input
                         type="checkbox"
                         checked={formData.projectTypes.includes(type)}
                         onChange={() => handleProjectTypeChange(type)}
-                        className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-400 focus:ring-2 relative z-40"
+                        className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-400 focus:ring-2 relative z-40 cursor-target"
                       />
                       <span className="text-sm font-medium">{type}</span>
                     </label>
@@ -184,7 +184,7 @@ const ContactForm: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 resize-none cursor-target"
                   placeholder="Describe your project in detail..."
                 />
               </div>
@@ -200,7 +200,7 @@ const ContactForm: React.FC = () => {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 cursor-target"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -215,7 +215,7 @@ const ContactForm: React.FC = () => {
                   value={formData.potentialBudget}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 relative z-30 cursor-target"
                 >
                   <option value="" className="bg-gray-800 text-white">Select your budget range</option>
                   {budgetOptions.map((option) => (
@@ -231,7 +231,7 @@ const ContactForm: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || formData.projectTypes.length === 0}
-                  className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 active:scale-95 relative z-30"
+                  className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 active:scale-95 relative z-30 cursor-target"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center space-x-2">
@@ -264,7 +264,7 @@ const ContactForm: React.FC = () => {
         <div className="text-center mt-8">
           <button
             onClick={() => navigate('/')}
-            className="inline-flex items-center space-x-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30"
+            className="inline-flex items-center space-x-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-target"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
