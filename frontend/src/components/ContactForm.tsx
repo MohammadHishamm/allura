@@ -30,12 +30,12 @@ const ContactForm: React.FC = () => {
   ];
 
   const budgetOptions = [
-    'Under $1,000',
-    '$1,000 - $5,000',
-    '$5,000 - $10,000',
-    '$10,000 - $25,000',
-    '$25,000 - $50,000',
-    'Over $50,000'
+    'Under $ EGP 5,000',
+    '$ EGP 10,000 - $ EGP 15,000',
+    '$ EGP 15,000 - $ EGP 20,000',
+    '$ EGP 20,000 - $ EGP 25,000',
+    '$ EGP 25,000 - $ EGP 50,000',
+    'Over $ EGP 50,000'
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -57,24 +57,10 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    e.stopPropagation();
-    
-    // Prevent any default form submission behavior
-    if (e.defaultPrevented) return;
-    
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Validate required fields
-    if (formData.projectTypes.length === 0) {
-      setSubmitStatus('error');
-      setIsSubmitting(false);
-      return;
-    }
-
     try {
-      console.log('Submitting form data:', formData);
-      
       const response = await fetch('https://weather-app-5b0s.onrender.com/contact', {
         method: 'POST',
         headers: {
@@ -82,10 +68,6 @@ const ContactForm: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      console.log('Response status:', response.status);
-      const responseData = await response.json();
-      console.log('Response data:', responseData);
 
       if (response.ok) {
         setSubmitStatus('success');
@@ -101,7 +83,6 @@ const ContactForm: React.FC = () => {
           navigate('/');
         }, 2000);
       } else {
-        console.error('Server error:', responseData);
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -113,7 +94,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
       <div className="w-full max-w-2xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
@@ -132,7 +113,7 @@ const ContactForm: React.FC = () => {
           
           {/* Form Container */}
           <div className="relative z-20 backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl">
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-30" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-30">
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -272,7 +253,7 @@ const ContactForm: React.FC = () => {
 
               {submitStatus === 'error' && (
                 <div className="mt-4 p-4 bg-red-500/20 border border-red-400/30 rounded-xl text-red-200 text-center">
-                  ❌ Something went wrong. Please check your connection and try again. If the problem persists, contact us directly.
+                  ❌ Something went wrong. Please try again or contact us directly.
                 </div>
               )}
             </form>
