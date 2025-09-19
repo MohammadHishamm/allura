@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Footer from './components/Footer';
 import Admin from './components/admin';
 import SignupForm from "./components/SignupForm";
