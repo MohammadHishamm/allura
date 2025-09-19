@@ -94,7 +94,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative pt-32">
+    <div className="min-h-screen flex items-center justify-center p-4 px-4 relative pt-56">
       <div className="w-full max-w-2xl relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
@@ -261,7 +261,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         {/* Back Button */}
-        <div className="text-center mt-8">
+        {/* <div className="text-center mt-8">
           <button
             onClick={() => navigate('/')}
             className="inline-flex items-center space-x-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-md relative z-30 cursor-target"
@@ -271,7 +271,7 @@ const ContactForm: React.FC = () => {
             </svg>
             <span>Back to Home</span>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

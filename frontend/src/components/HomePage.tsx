@@ -1,6 +1,6 @@
 import HeroSection from './HeroSection';
-import PricingPlans from './PricingPlans';
-import StatCard from './StatCard';
+// import PricingPlans from './PricingPlans';
+// import StatCard from './StatCard';
 
 const HomePage = () => {
   return (
@@ -8,13 +8,13 @@ const HomePage = () => {
       {/* Hero Section */}
       <HeroSection />
             {/* Pricing Plans Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
        <StatCard/>
-      </section>
+      </section> */}
       {/* Pricing Plans Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <PricingPlans />
-      </section>
+      </section> */}
 
     </main>
   );

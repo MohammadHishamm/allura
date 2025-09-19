@@ -17,7 +17,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               className="btn-purple-filled cursor-target"
-              onClick={() => window.location.href = '/signup'}
+              onClick={() => window.location.href = '/contact'}
             >
               Get Started
             </button>

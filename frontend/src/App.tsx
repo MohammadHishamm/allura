@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Admin from './components/admin';
 import SignupForm from "./components/SignupForm";
 import SigninForm from "./components/SigninForm";
@@ -13,8 +13,8 @@ import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import { Timeline } from './components/projects';
 
 const AppContent = () => {
-  const location = useLocation();
-  const isAdminPage = location.pathname === '/admin297_2';
+  // const location = useLocation();
+  // const isAdminPage = location.pathname === '/admin297_2';
   const data = [
     {
       title: "2024",
@@ -175,8 +175,7 @@ const AppContent = () => {
         <Route path="/signin" element={<SigninForm />} />
       </Routes>
       
-      {/* Footer - only show on non-admin pages */}
-      {!isAdminPage && <Footer />}
+ 
     </>
   );
 };

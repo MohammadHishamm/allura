@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useAuth } from "../auth/auth";
+// import { useAuth } from "../auth/auth";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuth, username, logout } = useAuth();
+  // const { isAuth, username, logout } = useAuth();
 const [activeLink, setActiveLink] = useState(window.location.pathname);
 
 useEffect(() => {
@@ -92,11 +92,11 @@ useEffect(() => {
             className="hidden md:flex items-center mx-auto gap-2" data-aos="fade-up">
             {[
               { href: "/", label: "home"},
-              { href: "/#benefits", label: "benefits" },
-              { href: "/#plans", label: "plans" },
-              { href: "/contact", label: "contact" },
-              { href: "/company", label: "about us" },
-              { href: "/projects", label: "projects" },
+              // { href: "/#benefits", label: "benefits" },
+              // { href: "/#plans", label: "plans" },
+              { href: "/contact", label: "contact" }
+              // { href: "/company", label: "about us" },
+              // { href: "/projects", label: "projects" },
 
             ].map((item, idx) => (
               <a
@@ -143,7 +143,7 @@ useEffect(() => {
           </div>
 
           {/* Authentication Buttons */}
-          <div className="hidden md:flex items-center gap-2 ml-4" data-aos="zoom-in">
+          {/* <div className="hidden md:flex items-center gap-2 ml-4" data-aos="zoom-in">
             {isAuth ? (
               // User is logged in - show username and logout
               <>
@@ -166,7 +166,7 @@ useEffect(() => {
                 Sign In
               </button>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -184,11 +184,11 @@ useEffect(() => {
           >
             {[
               { href: "/", label: "home"},
-              { href: "/#benefits", label: "Benefits" },
-              { href: "/#plans", label: "Plans" },
+              // { href: "/#benefits", label: "Benefits" },
+              // { href: "/#plans", label: "Plans" },
               { href: "/contact", label: "Contact" },
-              { href: "/company", label: "About Us" },
-              { href: "/projects", label: "projects" },
+              // { href: "/company", label: "About Us" },
+              // { href: "/projects", label: "projects" },
             ].map((item, idx) => (
               <a
                 key={idx}
@@ -207,7 +207,7 @@ useEffect(() => {
             ))}
 
             {/* Authentication for mobile */}
-            <div className="mt-2 flex flex-col gap-2">
+            {/* <div className="mt-2 flex flex-col gap-2">
               {isAuth ? (
                 // User is logged in - show username and logout
                 <>
@@ -232,7 +232,7 @@ useEffect(() => {
                   Sign In
                 </button>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       )}
