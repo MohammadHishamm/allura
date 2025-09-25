@@ -1,15 +1,17 @@
 import React from 'react';
 
 interface AdminSidebarProps {
-  activePage: 'home' | 'customers' | 'projects';
-  onPageChange: (page: 'home' | 'customers' | 'projects') => void;
+  activePage: 'home' | 'customers' | 'projects' | 'contactus' | 'joinus';
+  onPageChange: (page: 'home' | 'customers' | 'projects' | 'contactus' | 'joinus') => void;
 }
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage, onPageChange }) => {
   const menuItems = [
     { id: 'home', label: 'Home', icon: '🏠' },
     { id: 'customers', label: 'Customers', icon: '👥' },
-    { id: 'projects', label: 'Projects', icon: '📁' }
+    { id: 'projects', label: 'Projects', icon: '📁' },
+    { id: 'contactus', label: 'Contact Us', icon: '📞' },
+    { id: 'joinus', label: 'Join Us', icon: '👤' }
   ] as const;
 
   return (

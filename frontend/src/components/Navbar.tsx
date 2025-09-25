@@ -92,8 +92,8 @@ useEffect(() => {
             className="hidden md:flex items-center mx-auto gap-2" data-aos="fade-up">
              {[
                { href: "/", label: "home"},
-               { href: "/#benefits", label: "benefits" },
-               { href: "/#plans", label: "plans" },
+              // { href: "/#benefits", label: "benefits" },
+              // { href: "/#plans", label: "plans" },
                { href: "/contact", label: "contact" },
                { href: "/company", label: "about us" },
                { href: "/joinus", label: "join us" },

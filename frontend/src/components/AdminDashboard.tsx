@@ -6,8 +6,10 @@ import AdminSidebar from './AdminSidebar';
 import AdminHome from './AdminHome';
 import AdminCustomers from './AdminCustomers';
 import AdminProjects from './AdminProjects';
+import AdminContactUs from './AdminContactUs';
+import AdminJoinUs from './AdminJoinUs';
 
-type DashboardPage = 'home' | 'customers' | 'projects';
+type DashboardPage = 'home' | 'customers' | 'projects' | 'contactus' | 'joinus';
 
 const AdminDashboard: React.FC = () => {
   const [activePage, setActivePage] = useState<DashboardPage>('home');
@@ -31,6 +33,10 @@ const AdminDashboard: React.FC = () => {
         return <AdminCustomers />;
       case 'projects':
         return <AdminProjects />;
+      case 'contactus':
+        return <AdminContactUs />;
+      case 'joinus':
+        return <AdminJoinUs />;
       default:
         return <AdminHome />;
     }

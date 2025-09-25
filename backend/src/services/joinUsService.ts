@@ -1,9 +1,25 @@
 import { joinUsModel, IJoinUs } from "../modules/joinUsModel";
+import { sendJoinUsEmail } from "./nodemailer";
 
 export const createJoinUsApplication = async (applicationData: IJoinUs) => {
   try {
     const application = new joinUsModel(applicationData);
     const savedApplication = await application.save();
+    
+    // Send email notification
+    try {
+      await sendJoinUsEmail({
+        fullName: applicationData.fullName,
+        role: applicationData.role,
+        description: applicationData.description,
+        cvUrl: applicationData.cvUrl
+      });
+      console.log("Email notification sent successfully");
+    } catch (emailError) {
+      console.error("Failed to send email notification:", emailError);
+      // Don't fail the application if email fails
+    }
+    
     return {
       statusCode: 201,
       data: {
