@@ -49,50 +49,32 @@ const JoinUsForm: React.FC = () => {
     }));
   };
 
-  const uploadToCloudinary = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'ml_default'); // Replace with your Cloudinary upload preset
-
-    const response = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to upload file');
-    }
-
-    const data = await response.json();
-    return data.secure_url;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      let cvUrl = '';
-      
-      if (formData.cvFile) {
-        setUploadProgress(50);
-        cvUrl = await uploadToCloudinary(formData.cvFile);
-        setUploadProgress(100);
+      if (!formData.cvFile) {
+        setSubmitStatus('error');
+        return;
       }
+
+      // Create FormData for file upload
+      const submitData = new FormData();
+      submitData.append('fullName', formData.fullName);
+      submitData.append('role', formData.role);
+      submitData.append('description', formData.description);
+      submitData.append('cv', formData.cvFile);
+
+      setUploadProgress(50);
 
       const response = await fetch('https://weather-app-5b0s.onrender.com/joinus', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          role: formData.role,
-          description: formData.description,
-          cvUrl: cvUrl
-        }),
+        body: submitData, // Don't set Content-Type header, let browser set it with boundary
       });
+
+      setUploadProgress(100);
 
       if (response.ok) {
         setSubmitStatus('success');
