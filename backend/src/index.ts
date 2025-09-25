@@ -36,7 +36,35 @@ mongoose
   });
 
 app.use(express.json());
-app.use(cors());
+
+// CORS configuration for Vercel deployment
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://your-vercel-app.vercel.app', // Replace with your actual Vercel URL
+    'https://*.vercel.app' // Allow all Vercel subdomains
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  optionsSuccessStatus: 200
+}));
+
+// Debug middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path} from ${req.get('origin') || 'unknown'}`);
+  next();
+});
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
 app.use("/projects", projectRouter);
 app.use("/user", userRouter);
 app.use("/upload", uploadRouter);

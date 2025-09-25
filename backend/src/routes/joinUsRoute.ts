@@ -62,8 +62,11 @@ router.post('/', upload.single('cv'), async (req, res) => {
   try {
     console.log("📩 Join Us application request body:", req.body);
     console.log("📁 Uploaded file:", req.file);
+    console.log("🌐 Request origin:", req.get('origin'));
+    console.log("🌐 Request headers:", req.headers);
 
     if (!req.file) {
+      console.log("❌ No file uploaded");
       return res.status(400).json({ message: "CV file is required" });
     }
 
@@ -94,7 +97,15 @@ router.post('/', upload.single('cv'), async (req, res) => {
     res.status(result.statusCode).json(result.data);
   } catch (error) {
     console.error("❌ Join Us application error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("❌ Error details:", {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    });
+    res.status(500).json({ 
+      message: "Internal Server Error",
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 });
 
