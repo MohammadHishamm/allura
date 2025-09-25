@@ -5,6 +5,7 @@ import projectRouter from "./routes/projectRoute";
 import userRouter from "./routes/userRoute";
 import uploadRouter from "./routes/uploadRoute";
 import contactRouter from "./routes/contactRoute";
+import joinUsRouter from "./routes/joinUsRoute";
 import cors from "cors";
 
 dotenv.config();
@@ -40,6 +41,7 @@ app.use("/projects", projectRouter);
 app.use("/user", userRouter);
 app.use("/upload", uploadRouter);
 app.use("/contact", contactRouter);
+app.use("/joinus", joinUsRouter);
 
 
 

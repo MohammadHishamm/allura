@@ -96,6 +96,7 @@ useEffect(() => {
               { href: "/#plans", label: "plans" },
               { href: "/contact", label: "contact" },
               { href: "/company", label: "about us" },
+              { href: "/joinus", label: "join us" },
               { href: "/projects", label: "projects" },
 
             ].map((item, idx) => (
@@ -188,6 +189,7 @@ useEffect(() => {
               { href: "/#plans", label: "Plans" },
               { href: "/contact", label: "Contact" },
               { href: "/company", label: "About Us" },
+              { href: "/joinus", label: "Join Us" },
               { href: "/projects", label: "projects" },
             ].map((item, idx) => (
               <a

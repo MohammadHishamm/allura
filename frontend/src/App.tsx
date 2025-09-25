@@ -8,6 +8,7 @@ import AuthProvider from './auth/authProvider';
 import HomePage from './components/HomePage';
 import CompanyPage from './components/CompanyPage';
 import ContactForm from './components/ContactForm';
+import JoinUsForm from './components/JoinUsForm';
 import BackgroundWrapper from './components/BackgroundWrapper';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import { Timeline } from './components/projects';
@@ -165,6 +166,7 @@ const AppContent = () => {
       <Route path="/projects" element={<Timeline data={data} />} />
         <Route path="/company" element={<CompanyPage />} />
         <Route path="/contact" element={<ContactForm />} />
+        <Route path="/joinus" element={<JoinUsForm />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/admin297_2" element={
           <ProtectedAdminRoute>
