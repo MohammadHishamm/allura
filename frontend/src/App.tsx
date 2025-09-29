@@ -10,7 +10,7 @@ import CompanyPage from './components/CompanyPage';
 import ContactForm from './components/ContactForm';
 import JoinUsForm from './components/JoinUsForm';
 import BackgroundWrapper from './components/BackgroundWrapper';
-import ProtectedAdminRoute from './components/ProtectedAdminRoute';
+// import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import { Timeline } from './components/projects';
 
 const AppContent = () => {
@@ -168,11 +168,7 @@ const AppContent = () => {
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/joinus" element={<JoinUsForm />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/admin297_2" element={
-          <ProtectedAdminRoute>
-            <Admin />
-          </ProtectedAdminRoute>
-        } />
+        <Route path="/admin297_2" element={<Admin />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/signin" element={<SigninForm />} />
       </Routes>

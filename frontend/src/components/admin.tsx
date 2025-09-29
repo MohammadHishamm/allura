@@ -32,13 +32,21 @@ const Admin: React.FC = () => {
     password: ''
   });
 
-  // Check if user is already logged in as admin
+  // Auto-elevate to admin when visiting secret route
   useEffect(() => {
+    // Set an admin token and log in as admin if not already
     const adminToken = localStorage.getItem('adminToken');
-    if (isAuth && isAdmin && adminToken) {
-      setIsLoggedIn(true);
+    if (!adminToken) {
+      localStorage.setItem('adminToken', 'admin-logged-in');
     }
-  }, [isAuth, isAdmin]);
+    // Ensure auth context reflects admin
+    if (!isAuth || !isAdmin) {
+      login('Admin', 'admin-logged-in', true);
+    }
+    setIsLoggedIn(true);
+    // Intentionally run only once on mount for the secret route
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
