@@ -7,7 +7,7 @@ interface ProtectedAdminRouteProps {
 }
 
 const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({ children }) => {
-  const { isAuth, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
   const adminToken = localStorage.getItem('adminToken');
 
   // Check if user is authenticated and is admin
