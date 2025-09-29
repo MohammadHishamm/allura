@@ -69,7 +69,7 @@ const JoinUsForm: React.FC = () => {
 
       setUploadProgress(50);
 
-      const response = await fetch('https://weather-app-5b0s.onrender.com/joinus', {
+      const response = await fetch('http://localhost:5000/joinus', {
         method: 'POST',
         body: submitData, // Don't set Content-Type header, let browser set it with boundary
       });

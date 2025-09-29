@@ -11,7 +11,8 @@ const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({ children }) =
   const adminToken = localStorage.getItem('adminToken');
 
   // Check if user is authenticated and is admin
-  if (!isAuth || !isAdmin || !adminToken) {
+  // Only allow access when a valid admin token exists
+  if (!adminToken || !isAdmin) {
     // Redirect to home page if not authenticated or not admin
     return <Navigate to="/" replace />;
   }

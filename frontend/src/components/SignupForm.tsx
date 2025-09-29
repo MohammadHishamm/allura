@@ -154,8 +154,9 @@ const SignupForm: React.FC = () => {
         console.log('✅ Registration successful:', result);
         console.log('🔑 JWT Token:', result.token);
         
-        // Login the user with JWT token
-        login(result.username, result.token, result.isAdmin);
+        // Login the user with JWT token; ensure no stale admin token from previous admin session
+        localStorage.removeItem('adminToken');
+        login(result.username, result.token, false);
         
         setNotification({
           message: 'Account created successfully! Redirecting to home...',
