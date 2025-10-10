@@ -38,18 +38,31 @@ mongoose
 app.use(express.json());
 
 // CORS configuration for Vercel deployment
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://your-vercel-app.vercel.app', // Replace with your actual Vercel URL
-    'https://*.vercel.app' // Allow all Vercel subdomains
-  ],
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://allura-three.vercel.app'
+];
+
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, server-to-server)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   optionsSuccessStatus: 200
-}));
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Debug middleware
 app.use((req, res, next) => {
